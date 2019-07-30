@@ -21,7 +21,7 @@ module Api::V1
     end
 
     def destroy
-      @user.destroy
+      @user.destroy!
       render json: {message: "Deleted Success"}, status: 200
     end
 
