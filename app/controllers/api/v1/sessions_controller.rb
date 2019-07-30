@@ -5,8 +5,6 @@ module Api::V1
     def create
       if @user.valid_password? params[:password]
         sign_in @user, store: false
-        # render json: { message: "Signed in successfully", user: @user  }
-        # render json: { user: @user }, status: 200
         render json:  @user, status: 200
         return
       end
