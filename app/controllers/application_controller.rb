@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::API
   # protect_from_forgery with: :null_session
   # skip_before_action :verify_authenticity_token
-  acts_as_token_authentication_handler_for User, {fallback: :none, except: [:index, :show, :create, :update]}
+  acts_as_token_authentication_handler_for User, { fallback: :none, except: [:index, :show, :create, :update] }
+  acts_as_token_authentication_handler_for Post, { fallback: :none, except: [:create] }
   
 
   def load_user_authentication

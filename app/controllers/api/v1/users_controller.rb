@@ -3,7 +3,8 @@ module Api::V1
     before_action :set_user, only: [:show, :update, :destroy]
 
     def index 
-      render json: {test: 'Abc'}
+      @users = User.all
+      render json:  @users, status: 200
     end
 
     def show
