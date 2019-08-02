@@ -4,7 +4,15 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
-  has_many :posts
+  validates :authentication_token, uniqueness: true
 
-  validates :authentication_token, presence: true, uniqueness: true
+  has_many :posts, dependent: :destroy
+
+  def username
+  	email
+  end
+
+  def self.search_by_string(str)
+  	where("email LIKE ?", "%#{ str }%")
+  end
 end
