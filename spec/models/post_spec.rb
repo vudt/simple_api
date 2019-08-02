@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  
   describe "validation" do 
   	before :each do 
       @user = FactoryBot.create(:user)

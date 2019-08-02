@@ -31,21 +31,21 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
 	describe "create" do 
 	  it "has record valid" do 
-      	post :create, params: {
-          email: Faker::Internet.email,
-		  password: "123456",
-		  password_confirmation: "123456"
-      	}
-      	expect(response.status).to eq(200)
+      post :create, params: {
+        email: Faker::Internet.email,
+		  	password: "123456",
+		  	password_confirmation: "123456"
+      }
+      expect(response.status).to eq(200)
 	  end
 
 	  it "invalid params email return status 422" do 
 	  	post :create, params: {
-          email: '',
-		  password: "123456",
-		  password_confirmation: "123456"
-      	}
-      	expect(response.status).to eq(422)
+        email: '',
+        password: "123456",
+        password_confirmation: "123456"
+      }
+      expect(response.status).to eq(422)
 	  end
 	end
 
@@ -69,7 +69,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 	  	put :update, params: {
 	      id: @user.id,
 	      password: "1234567",
-		  password_confirmation: "123456"
+		    password_confirmation: "123456"
 	    }
 	    expect(response.status).to eq(422)
 	  end
@@ -80,22 +80,22 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 	  	put :update, params: {
 	      id: @user.id,
 	      password: "123456",
-		  password_confirmation: "123456"
+		  	password_confirmation: "123456"
 	    }
 	    expect(response.status).to eq(404)
 	  end
 	end
 
-	describe "destroy" do 
-      it "destroy success" do 
-      	2.times{ FactoryBot.create(:user) }	
-        user1 = User.first
-        user2 = User.last
-        request.headers["Authorization"] = user1.authentication_token
+	describe "destroy" do
+    it "destroy success" do
+      2.times{ FactoryBot.create(:user) }
+      user1 = User.first
+      user2 = User.last
+      request.headers["Authorization"] = user1.authentication_token
 	    put :destroy, params: { id: user1.id}
 	    expect(response.status).to eq(200)
-        expect(User.count).to eq(1)
-        expect(User.first.id).not_to eq(user1.id)
-      end
+      expect(User.count).to eq(1)
+      expect(User.first.id).not_to eq(user1.id)
+    end
 	end
 end
