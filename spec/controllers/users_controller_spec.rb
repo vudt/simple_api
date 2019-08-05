@@ -31,21 +31,21 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
   describe "create" do 
 	it "has record valid" do 
-    post :create, params: {
-      email: Faker::Internet.email,
-	  password: "123456",
-	  password_confirmation: "123456"
-    }
-    expect(response.status).to eq(200)
+      post :create, params: {
+        email: Faker::Internet.email,
+	    password: "123456",
+	    password_confirmation: "123456"
+      }
+      expect(response.status).to eq(200)
 	end
 
 	it "invalid params email return status 422" do 
 	  post :create, params: {
-      email: '',
-      password: "123456",
-      password_confirmation: "123456"
-    }
-    expect(response.status).to eq(422)
+        email: '',
+        password: "123456",
+        password_confirmation: "123456"
+      }
+      expect(response.status).to eq(422)
 	end
   end
 
